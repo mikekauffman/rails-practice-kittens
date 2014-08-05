@@ -1,4 +1,7 @@
 <%= form_for [@kitten, @categorization] do |f| %>
-    <%= f.collection_select :category_id, @categories, :id, :name %>
+    <% if @categorization.errors.any? %>
+        <%= @categorization.errors.full_messages.last %>
+    <% end %>
+    <%= f.collection_select :category_id, @categories, :id, :name, {include_blank: true} %>
     <%= f.submit "Add Category" %>
 <% end %>

@@ -6,7 +6,13 @@ class CategorizationsController < ApplicationController
   end
 
   def create
-    Categorization.create!(kitten_id: params[:kitten_id], category_id: params[:categorization][:category_id])
-    redirect_to root_path
+    @categorization = Categorization.new(kitten_id: params[:kitten_id], category_id: params[:categorization][:category_id])
+    if @categorization.save
+      redirect_to root_path
+    else
+      @kitten = Kitten.find(params[:kitten_id])
+      @categories = Category.all
+      render :new
+    end
   end
 end
