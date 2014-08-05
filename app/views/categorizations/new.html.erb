@@ -1,0 +1,4 @@
+<%= form_for [@kitten, @categorization] do |f| %>
+    <%= f.collection_select :category_id, @categories, :id, :name %>
+    <%= f.submit "Add Category" %>
+<% end %>
